@@ -1,0 +1,50 @@
+﻿<Window x:Class="EFCUTY_HFT_2021221.WPFClient.CitizenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EFCUTY_HFT_2021221.WPFClient"
+        mc:Ignorable="d"
+        Title="Citizen Editor" Height="640" Width="800">
+    <Window.DataContext>
+        <local:CitizenWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Citizens, Mode=TwoWay}" SelectedItem="{Binding SelectedCitizen}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="Name" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedCitizen.Name}" Padding="5" Margin="0,0,0,0"/>
+            <Label Content="Date of Birth" Background="LightBlue" Padding="10"/>
+            <DatePicker SelectedDate="{Binding SelectedCitizen.BirthDate}"></DatePicker>
+            <Label Content="Criminal record" Background="LightBlue" Padding="10"/>
+            <CheckBox Content="Has criminal record" IsChecked="{Binding SelectedCitizen.HasCriminalRecord}" Margin="10,10,10,10"/>
+            <Label Content="Annual income in USD" Background="LightBlue" Padding="10"/>
+            <TextBox Text="{Binding SelectedCitizen.IncomeInUSD}" Padding="5" Margin="0,0,0,0"/>
+            <Label Content="Settlement" Background="LightBlue" Padding="10"/>
+            <ComboBox ItemsSource="{Binding Settlements}"
+                      DisplayMemberPath="SettlementName"
+                      SelectedValuePath="SettlementID"
+                      SelectedValue="{Binding SelectedCitizen.SettlementID}"
+                      Margin="0,0,0,0"/>
+            <Label Content="Country" Background="LightBlue" Padding="10"/>
+            <ComboBox ItemsSource="{Binding Countries}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="CountryID"
+                      SelectedValue="{Binding SelectedCitizen.CitizenshipID}"
+                      Margin="0,0,0,30"/>
+            <Button Content="Create Citizen" Command="{Binding CreateCitizenCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Citizen" Command="{Binding DeleteCitizenCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Citizen" Command="{Binding UpdateCitizenCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+    </Grid>
+</Window>
