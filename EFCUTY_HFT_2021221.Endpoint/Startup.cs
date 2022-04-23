@@ -45,6 +45,12 @@ namespace EFCUTY_HFT_2021221.Endpoint
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EFCUTY_HFT_2021221.Endpoint v1"));
             }
 
+            app.UseCors(x => x
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:47186"));
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
