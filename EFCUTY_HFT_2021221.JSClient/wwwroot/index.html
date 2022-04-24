@@ -18,16 +18,24 @@
                 <th>Yearly salary (USD)</th>
                 <th>Settlement</th>
                 <th>Country</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" id="name" /></td>
+                <td><input type="date" value=1970-01-01 id="birthDate"></td>
+                <td><input type="checkbox" id="hasCriminalRecord" /></td>
+                <td><input type="number" id="incomeInUSD" /></td>
+                <td><select id="selectSettlement"></select></td>
+                <td><select id="selectCountry"></select></td>
+                <td><button type="button" onclick="create()">Add citizen</button></td>
             </tr>
         </thead>
         <tbody id="resultarea">
-            <tr>
-
-            </tr>
         </tbody>
     </table>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
