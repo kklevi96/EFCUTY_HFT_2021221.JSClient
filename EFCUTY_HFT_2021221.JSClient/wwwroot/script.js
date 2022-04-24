@@ -75,12 +75,12 @@ function display() {
     citizens.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
             `<tr><td>${t.personID}</td>` +
-            `<td><input type="text" id="name_${t.personID}" value="${t.name}"></td >` +
+            `<td><input type="text" class=textinput id="name_${t.personID}" value="${t.name}"></td >` +
             `<td><input type="date" id="birthdate_${t.personID}" value="${dateFormat(t.birthDate)}"></td>` +
             `<td><input type="checkbox" id="hasCriminalRecord_${t.personID}" value="${(t.hasCriminalRecord)} " ${booleanToChecbox(t.hasCriminalRecord)} ></td >` +
-            `<td><input type="number" id="incomeInUSD_${t.personID}" value="${t.incomeInUSD}"></td >` +
-            `<td>${t.settlement.settlementName} <input type="number" id="selectSettlement_${t.personID}" value=${t.settlementID} ></td >` +
-            `<td>${t.citizenship.name} <input type="number" id="selectCountry_${t.personID}" value=${t.citizenshipID}></td>` +
+            `<td><input type="number" class=numinput id="incomeInUSD_${t.personID}" value="${t.incomeInUSD}"></td >` +
+            `<td>${t.settlement.settlementName}<br/>ID: <input type="number" class="idinput" id="selectSettlement_${t.personID}" value=${t.settlementID} ></td >` +
+            `<td>${t.citizenship.name}<br/>ID: <input type="number" class=idinput id="selectCountry_${t.personID}" value=${t.citizenshipID}></td>` +
             `<td>
                 <button type="button" onclick="update(${t.personID})">Update citizen</button>
                 </br>

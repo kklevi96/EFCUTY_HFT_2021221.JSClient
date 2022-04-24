@@ -17,3 +17,23 @@ th, td {
 th{
     background-color: lightskyblue;
 }
+
+.idinput{
+    width:40px;
+}
+
+.numinput{
+    width:70px;
+}
+
+.textinput{
+    min-width:100px;
+    width:95%;
+}
+
+table button{
+    padding:2px;
+}
+
+.longtext{
+}
