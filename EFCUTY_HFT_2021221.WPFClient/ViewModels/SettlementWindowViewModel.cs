@@ -1,12 +1,7 @@
 ﻿using EFCUTY_HFT_2021221.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -28,7 +23,7 @@ namespace EFCUTY_HFT_2021221.WPFClient
                 {
                     selectedSettlement = new Settlement()
                     {
-                        SettlementID=value.SettlementID,
+                        SettlementID = value.SettlementID,
                         SettlementName = value.SettlementName,
                         Population = value.Population,
                         HDI = value.HDI,

@@ -1,7 +1,6 @@
 ﻿using EFCUTY_HFT_2021221.Models;
 using EFCUTY_HFT_2021221.Repository;
 //using Microsoft.Toolkit.Mvvm.Messaging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,8 +57,8 @@ namespace EFCUTY_HFT_2021221.Logic
 
             //if (ThisNameExists(country.Name))
             //{
-                //return;
-                //messenger.Send("The country with this name already exists!", "LogicInfo");
+            //return;
+            //messenger.Send("The country with this name already exists!", "LogicInfo");
             //}
 
             if (country.Name == "")

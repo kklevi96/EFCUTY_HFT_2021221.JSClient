@@ -1,12 +1,7 @@
 ﻿using EFCUTY_HFT_2021221.Models;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -60,7 +55,7 @@ namespace EFCUTY_HFT_2021221.WPFClient
             {
                 Countries = new RestCollection<Country>("http://localhost:54726/", "country", "hub");
                 CreateCountryCommand = new RelayCommand(() =>
-                {                        
+                {
                     Countries.Add(new Country()
                     {
                         Name = SelectedCountry.Name,
