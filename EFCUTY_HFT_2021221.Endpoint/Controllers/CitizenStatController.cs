@@ -18,13 +18,13 @@ namespace EFCUTY_HFT_2021221.Endpoint.Controllers
             this.ctl = ctl;
             this.hub = hub;
         }
-        
+
         [HttpGet]
         public IEnumerable<Citizen> PoorOldPeople()
         {
             return ctl.PoorOldPeople();
         }
-        
+
         [HttpGet]
         public IEnumerable<Citizen> DevelopedCriminals()
         {
