@@ -4,17 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EFCUTY_HFT_2021221.WPFClient"
+        xmlns:vm="clr-namespace:EFCUTY_HFT_2021221.WPFClient.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="200" Width="300">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Content="Countries" Height="40" Margin="5" Click="ButtonCty_Click"> </Button>
-        <Button Content="Settlements" Height="40" Margin="5" Click="ButtonStl_Click" Grid.Row="1"></Button>
-        <Button Content="Citizens" Height="40" Margin="5" Click="ButtonCtn_Click" Grid.Row="2"></Button>
+        <Button Content="Countries" Height="40" Margin="5" Command="{Binding OpenCountryWindowCommand}"> </Button>
+        <Button Content="Settlements" Height="40" Margin="5" Command="{Binding OpenSettlementWindowCommand}" Grid.Row="1"></Button>
+        <Button Content="Citizens" Height="40" Margin="5" Command="{Binding OpenCitizenWindowCommand}" Grid.Row="2"></Button>
 
 
     </Grid>

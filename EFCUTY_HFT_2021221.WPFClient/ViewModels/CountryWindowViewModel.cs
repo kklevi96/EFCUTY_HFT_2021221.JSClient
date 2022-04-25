@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace EFCUTY_HFT_2021221.WPFClient
+namespace EFCUTY_HFT_2021221.WPFClient.ViewModels
 {
     public class CountryWindowViewModel : ObservableRecipient
     {

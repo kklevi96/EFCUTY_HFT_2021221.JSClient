@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EFCUTY_HFT_2021221.WPFClient"
+        xmlns:local="clr-namespace:EFCUTY_HFT_2021221.WPFClient.ViewModels"
+        xmlns:vm="clr-namespace:EFCUTY_HFT_2021221.WPFClient.ViewModels"
         mc:Ignorable="d"
         Title="Settlement Editor" Height="550" Width="800">
     <Window.DataContext>
-        <local:SettlementWindowViewModel/>
+        <vm:SettlementWindowViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
