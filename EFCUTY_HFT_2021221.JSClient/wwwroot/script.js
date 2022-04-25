@@ -162,7 +162,6 @@ function create() {
 }
 
 function update(id) {
-    console.log("update citizen " + id);
     let name = document.getElementById('name_' + id).value;
     let birthDate = document.getElementById('birthdate_' + id).value;
     let hasCriminalRecord = document.getElementById('hasCriminalRecord_' + id).checked == 1;
@@ -188,7 +187,6 @@ function update(id) {
     })
         .then(response => response)
         .then(data => {
-            console.log("Citizen updated");
             console.log('Success:', data);
             getdata();
         })
