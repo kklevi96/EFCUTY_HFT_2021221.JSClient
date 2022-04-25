@@ -17,6 +17,7 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             settlements = y;
+            removeOptions(document.getElementById('selectSettlement'));
             selectSettlement();
         });
 
@@ -24,6 +25,7 @@ async function getdata() {
         .then(x => x.json())
         .then(y => {
             countries = y;
+            removeOptions(document.getElementById('selectCountry'));
             selectCountry();
         });
 }
@@ -37,21 +39,55 @@ function setupSignalR() {
     connection.on(
         "CitizenCreated", (user, message) => {
             console.log("citizen created");
-                getdata();
+            getdata();
     });
 
     connection.on(
         "CitizenUpdated", (user, message) => {
             console.log("citizen updated");
-                getdata();
+            getdata();
     });
 
     connection.on(
         "CitizenDeleted", (user, message) => {
             console.log("citizen deleted");
-                getdata();
+            getdata();
     });
 
+    connection.on(
+        "SettlementCreated", (user, message) => {
+            console.log("citizen created");
+            getdata();
+        });
+
+    connection.on(
+        "SettlementUpdated", (user, message) => {
+            console.log("citizen updated");
+            getdata();
+        });
+
+    connection.on(
+        "SettlementDeleted", (user, message) => {
+            console.log("citizen deleted");
+            getdata();
+    });
+    connection.on(
+        "CountryCreated", (user, message) => {
+            console.log("citizen created");
+            getdata();
+        });
+
+    connection.on(
+        "CountryUpdated", (user, message) => {
+            console.log("citizen updated");
+            getdata();
+        });
+
+    connection.on(
+        "CountryDeleted", (user, message) => {
+            console.log("citizen deleted");
+            getdata();
+        });
     connection.onclose(async () => {
         await start();
     });
@@ -125,6 +161,14 @@ function selectCountry() {
         el.textContent = opt.name;
         el.value = opt.countryID;
         selectCountry.appendChild(el);
+    }
+}
+
+/* https://stackoverflow.com/questions/3364493/how-do-i-clear-all-options-in-a-dropdown-box */
+function removeOptions(selectElement) {
+    var i, L = selectElement.options.length - 1;
+    for (i = L; i >= 0; i--) {
+        selectElement.remove(i);
     }
 }
 
