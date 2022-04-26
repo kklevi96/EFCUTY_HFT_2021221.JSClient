@@ -1,5 +1,15 @@
-﻿table {
+﻿*{
+    font-family:Consolas;
+}
+
+h1{
+    text-align:center;
+    font-size:3em;
+}
+
+table {
     width: 100%;
+    font-size:1.05em;
 }
 
 table, th, td {
@@ -12,27 +22,62 @@ table {
 
 th, td {
     padding: 5px;
+    text-align:center;
 }
 
 th{
     background-color: lightskyblue;
+    font-size:1.1em;
+}
+
+select{
+    font-size:0.9em;
+    padding:2px;
+    width:100%;
+}
+
+input{
+    font-size:0.9em;
+    flex-direction:row;
+    padding:2px;
+}
+
+.checkbox{
+    transform:scale(1.4);
+
 }
 
 .idinput{
     width:40px;
+    text-align:center;
 }
 
 .numinput{
     width:70px;
+    text-align:center;
 }
 
 .textinput{
     min-width:100px;
+    flex-direction:row;
+    column-width:auto;
     width:95%;
 }
 
+.leftalign{
+    text-align:left;
+}
+
+.leftalign{
+    text-align:left;
+}
+
 table button{
-    padding:2px;
+    flex:auto;
+    margin:1px;
+    width:100%;
+    font-weight:bolder;
+    font-size:0.85em;
 }
 
 .longtext{
