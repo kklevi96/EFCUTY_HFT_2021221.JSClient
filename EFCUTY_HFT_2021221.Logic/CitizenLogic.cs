@@ -38,6 +38,12 @@ namespace EFCUTY_HFT_2021221.Logic
 
         public void Update(Citizen citizen)
         {
+            DateTime earliest = new(1900, 01, 01);
+            if (citizen.BirthDate < earliest)
+            {
+                throw new ArgumentException("BirthDate is too early! That citizen is surely dead now.");
+            }
+
             if (citizen.Name == "")
             {
                 throw new ArgumentException("The person must have a name!");
