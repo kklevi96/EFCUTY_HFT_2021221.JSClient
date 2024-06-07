@@ -4,12 +4,34 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiClient"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="MauiClient">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!--<FlyoutItem Title="Welcome window">
+        <ShellContent
+            Title="MainPage"
+            ContentTemplate="{DataTemplate local:MainPage}"
+
+            Route="MainPage"/>
+            
+    </FlyoutItem>-->
+    <FlyoutItem Title="Countries">
+        <ShellContent
+            Title="Countries"
+            ContentTemplate="{DataTemplate local:CountryPage}"
+            Route="CountryPage"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Settlements">
+        <ShellContent
+        Title="Settlements"
+        ContentTemplate="{DataTemplate local:SettlementPage}"
+        Route="SettlementPage"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Citizens">
+        <ShellContent
+        Title="Citizens"
+        ContentTemplate="{DataTemplate local:CitizenPage}"
+        Route="CitizenPage"/>
+    </FlyoutItem>
 
 </Shell>
