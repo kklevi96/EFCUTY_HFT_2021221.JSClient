@@ -18,7 +18,14 @@ namespace MauiClient
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<CountryViewModel>();
+            builder.Services.AddSingleton<CountryPage>();
+            builder.Services.AddSingleton<SettlementViewModel>();
+            builder.Services.AddSingleton<SettlementPage>();
+            builder.Services.AddSingleton<CitizenViewModel>();
+            builder.Services.AddSingleton<CitizenPage>();
             return builder.Build();
         }
     }
