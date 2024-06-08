@@ -2,8 +2,11 @@ namespace MauiClient;
 
 public partial class SettlementPage : ContentPage
 {
-	public SettlementPage()
-	{
-		InitializeComponent();
-	}
+    SettlementViewModel viewModel;
+    public SettlementPage(SettlementViewModel viewModel)
+    {
+        InitializeComponent();
+        this.viewModel = viewModel;
+        BindingContext = viewModel;
+    }
 }

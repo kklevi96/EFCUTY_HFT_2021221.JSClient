@@ -2,8 +2,11 @@ namespace MauiClient;
 
 public partial class CitizenPage : ContentPage
 {
-	public CitizenPage()
-	{
-		InitializeComponent();
-	}
+    CitizenViewModel viewModel;
+    public CitizenPage(CitizenViewModel viewModel)
+    {
+        InitializeComponent();
+        this.viewModel = viewModel;
+        BindingContext = viewModel;
+    }
 }
