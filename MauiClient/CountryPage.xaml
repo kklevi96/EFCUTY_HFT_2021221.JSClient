@@ -28,8 +28,12 @@
         </CollectionView>
         <ActivityIndicator Color="Brown" IsRunning="{Binding IsBusy}"/>
         <VerticalStackLayout Grid.Column="1">
-            <Label Text="Actor name:"/>
+            <Label Text="Country name:"/>
             <Entry Text="{Binding SelectedCountry.Name}"/>
+            <Label Text="OECD Member?"/>
+            <CheckBox IsChecked="{Binding SelectedCountry.IsOECDMember}" />
+            <Label Text="Country name:"/>
+            <Entry Text="{Binding SelectedCountry.TotalGDPInMillionUSD}"/>
             <Button Text="Create country" Command="{Binding CreateCountryCommand}"/>
             <Button Text="Update country" Command="{Binding UpdateCountryCommand}"/>
             <Button Text="Delete country" Command="{Binding DeleteCountryCommand}"/>
