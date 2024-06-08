@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiClient.CountryPage"
+             xmlns:local="clr-namespace:MauiClient"
+             xmlns:model="clr-namespace:MauiClient.Model"
+             x:DataType="local:CountryViewModel"
              Title="CountryPage">
     <ContentPage.Resources>
         <Style TargetType="Button">
@@ -11,6 +14,25 @@
         </Style>
     </ContentPage.Resources>
     <Grid ColumnDefinitions="*,*">
-        
+
+        <CollectionView ItemsSource="{Binding Countries}"
+                    SelectedItem="{Binding SelectedCountry}"
+                    SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Country">
+                    <Border Margin="5" Padding="5">
+                        <Label Text="{Binding Name}"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator Color="Brown" IsRunning="{Binding IsBusy}"/>
+        <VerticalStackLayout Grid.Column="1">
+            <Label Text="Actor name:"/>
+            <Entry Text="{Binding SelectedCountry.Name}"/>
+            <Button Text="Create country" Command="{Binding CreateCountryCommand}"/>
+            <Button Text="Update country" Command="{Binding UpdateCountryCommand}"/>
+            <Button Text="Delete country" Command="{Binding DeleteCountryCommand}"/>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>
