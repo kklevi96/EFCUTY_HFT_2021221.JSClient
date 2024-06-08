@@ -58,8 +58,8 @@ namespace MauiClient
         [RelayCommand]
         async Task CreateCountryAsync()
         {
-            await restService.PostAsync<Country>(new Country() { Name = "New Country" }, "country");
-            await Shell.Current.DisplayAlert("Create", "New country created.", "OK");
+            await restService.PostAsync<Country>(new Country() { Name = new Guid().ToString(), IsOECDMember=false,TotalGDPInMillionUSD=10000 }, "country");
+            await Shell.Current.DisplayAlert("Create", "New country created with default values.", "OK");
             await GetCountriesAsync();
         }
     }
