@@ -1,35 +1,61 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiClient.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MauiClient
 {
     public partial class SettlementViewModel : ObservableObject
     {
-        RestService restService = new RestService("http://localhost:54726/");
+        private readonly RestService restService = new RestService("http://localhost:54726/");
 
         [ObservableProperty]
-        ObservableCollection<Settlement> settlements;
+        private ObservableCollection<Settlement> settlements;
 
         [ObservableProperty]
-        Settlement selectedSettlement;
+        private ObservableCollection<Country> countries;
 
         [ObservableProperty]
-        bool isBusy;
+        private Settlement selectedSettlement;
+
+        [ObservableProperty]
+        ObservableCollection<string> countryNames;
+
+        [ObservableProperty]
+        private bool isBusy;
+
+        private string _selectedCountryName;
+        public string SelectedCountryName
+        {
+            get => _selectedCountryName;
+            set
+            {
+                if (_selectedCountryName != value)
+                {
+                    _selectedCountryName = value;
+                    OnPropertyChanged();
+                    UpdateSelectedCountry();
+                }
+            }
+        }
 
         public SettlementViewModel()
         {
             settlements = new ObservableCollection<Settlement>();
-            GetSettlementsAsync();
+            countries = new ObservableCollection<Country>();
+            countryNames = new ObservableCollection<string>();
+            GetAllDatasAsync();
         }
 
-        async Task GetSettlementsAsync()
+        private async Task GetAllDatasAsync()
+        {
+            await GetCountriesAsync();
+            await GetSettlementsAsync();
+        }
+
+        private async Task GetSettlementsAsync()
         {
             IsBusy = true;
             settlements.Clear();
@@ -38,28 +64,54 @@ namespace MauiClient
             IsBusy = false;
         }
 
-        [RelayCommand]
-        async Task UpdateCountryAsync()
+        async Task GetCountriesAsync()
         {
-            await restService.PutAsync<Settlement>(SelectedSettlement, "settlement");
-            await Shell.Current.DisplayAlert("Update", "Update successful.", "OK");
-            await GetSettlementsAsync();
+            IsBusy = true;
+            countries.Clear();
+            countryNames.Clear();
+            var list = await restService.GetAsync<Country>("country");
+            list.ForEach(country => countries.Add(country));
+            foreach (var country in countries)
+            {
+                countryNames.Add(country.Name);
+            }
+            IsBusy = false;
+        }
+
+        private void UpdateSelectedCountry()
+        {
+            if (SelectedSettlement != null && !string.IsNullOrEmpty(SelectedCountryName))
+            {
+                var selectedCountry = countries.FirstOrDefault(c => c.Name == SelectedCountryName);
+                if (selectedCountry != null)
+                {
+                    SelectedSettlement.CountryID = selectedCountry.CountryID;
+                }
+            }
         }
 
         [RelayCommand]
-        async Task DeleteCountryAsync()
+        public async Task UpdateSettlementAsync()
+        {
+            await restService.PutAsync(SelectedSettlement, "settlement");
+            await Shell.Current.DisplayAlert("Update", "Update successful.", "OK");
+            await GetAllDatasAsync();
+        }
+
+        [RelayCommand]
+        public async Task DeleteSettlementAsync()
         {
             await restService.DeleteAsync(SelectedSettlement.SettlementID, "settlement");
             await Shell.Current.DisplayAlert("Delete", "Delete successful.", "OK");
-            await GetSettlementsAsync();
+            await GetAllDatasAsync();
         }
 
         [RelayCommand]
-        async Task CreateSettlementAsync()
+        public async Task CreateSettlementAsync()
         {
-            await restService.PostAsync<Settlement>(new Settlement() { SettlementName = new Guid().ToString() ,CountryID=1,HDI=0.9,Population=100000 }, "settlement");
+            await restService.PostAsync(new Settlement() { SettlementName = Guid.NewGuid().ToString(), CountryID = 1, HDI = 0.9, Population = 100000 }, "settlement");
             await Shell.Current.DisplayAlert("Create", "New settlement created with default values.", "OK");
-            await GetSettlementsAsync();
+            await GetAllDatasAsync();
         }
     }
 }

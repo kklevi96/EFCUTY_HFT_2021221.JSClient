@@ -1,4 +1,5 @@
 namespace MauiClient;
+using Model;
 
 public partial class SettlementPage : ContentPage
 {
@@ -8,5 +9,14 @@ public partial class SettlementPage : ContentPage
         InitializeComponent();
         this.viewModel = viewModel;
         BindingContext = viewModel;
+
+        //countryPicker.SelectedIndexChanged += (sender, args) =>
+        //{
+        //    if (countryPicker.SelectedIndex != -1)
+        //    {
+        //        var selectedCountryName = (string)countryPicker.SelectedItem;
+        //        viewModel.SelectedSettlement.Country.Name = selectedCountryName;
+        //    }
+        //};
     }
 }

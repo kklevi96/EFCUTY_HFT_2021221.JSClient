@@ -2,11 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiClient.SettlementPage"
+             xmlns:local="clr-namespace:MauiClient"
+             xmlns:model="clr-namespace:MauiClient.Model"
+             x:DataType="local:SettlementViewModel"
              Title="SettlementPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Settlement Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BackgroundColor" Value="BurlyWood"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <ResourceDictionary>
+            <local:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid ColumnDefinitions="*,*">
+
+        <CollectionView ItemsSource="{Binding Settlements}"
+                    SelectedItem="{Binding SelectedSettlement}"
+                    SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Settlement">
+                    <Border Margin="5" Padding="5">
+                        <Label Text="{Binding SettlementName}"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator Color="Brown" IsRunning="{Binding IsBusy}"/>
+        <VerticalStackLayout Grid.Column="1">
+            <Label Text="Settlement name:"/>
+            <Entry Text="{Binding SelectedSettlement.SettlementName}"/>
+            <Label Text="View country below"/>
+            <Picker Title="Select Country"
+                    x:Name="countryPicker"
+                    ItemsSource="{Binding CountryNames}"
+                    SelectedItem="{Binding SelectedSettlement.Country.Name, Mode=TwoWay}" 
+                    IsEnabled="False"/>
+            <Label Text="Update country below"></Label>
+            <Picker Title="Select Country"
+                    x:Name="countryPicker2"
+                    ItemsSource="{Binding CountryNames}"
+                    SelectedItem="{Binding SelectedCountryName, Mode=TwoWay}"/>
+            <!--<Label Text="{Binding SelectedSettlement.Country.Name}"/>-->
+            <Entry Text="{Binding SelectedSettlement.HDI, Converter={StaticResource DoubleToStringConverter}}"/>
+            <Label Text="Population"/>
+            <Entry Text="{Binding SelectedSettlement.Population}"/>
+            <Button Text="Create settlement" Command="{Binding CreateSettlementCommand}"/>
+            <Button Text="Update settlement" Command="{Binding UpdateSettlementCommand}"/>
+            <Button Text="Delete settlement" Command="{Binding DeleteSettlementCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
