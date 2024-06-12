@@ -43,7 +43,7 @@
             <Picker Title="Select Country"
                     x:Name="countryPicker2"
                     ItemsSource="{Binding CountryNames}"
-                    SelectedItem="{Binding SelectedCountryName, Mode=TwoWay}"/>
+                    SelectedItem="{Binding SelectedCountryName, Mode=TwoWay}" />
             <!--<Label Text="{Binding SelectedSettlement.Country.Name}"/>-->
             <Entry Text="{Binding SelectedSettlement.HDI, Converter={StaticResource DoubleToStringConverter}}"/>
             <Label Text="Population"/>

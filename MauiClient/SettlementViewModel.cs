@@ -18,13 +18,12 @@ namespace MauiClient
         private ObservableCollection<Country> countries;
 
         [ObservableProperty]
+        private bool isBusy;
+
+
+        [ObservableProperty]
         private Settlement selectedSettlement;
 
-        [ObservableProperty]
-        ObservableCollection<string> countryNames;
-
-        [ObservableProperty]
-        private bool isBusy;
 
         private string _selectedCountryName;
         public string SelectedCountryName
@@ -41,11 +40,13 @@ namespace MauiClient
             }
         }
 
+        public ObservableCollection<string> CountryNames { get; private set; }
+
         public SettlementViewModel()
         {
             settlements = new ObservableCollection<Settlement>();
             countries = new ObservableCollection<Country>();
-            countryNames = new ObservableCollection<string>();
+            CountryNames = new ObservableCollection<string>();
             GetAllDatasAsync();
         }
 
@@ -64,16 +65,16 @@ namespace MauiClient
             IsBusy = false;
         }
 
-        async Task GetCountriesAsync()
+        private async Task GetCountriesAsync()
         {
             IsBusy = true;
             countries.Clear();
-            countryNames.Clear();
+            CountryNames.Clear();
             var list = await restService.GetAsync<Country>("country");
             list.ForEach(country => countries.Add(country));
             foreach (var country in countries)
             {
-                countryNames.Add(country.Name);
+                CountryNames.Add(country.Name);
             }
             IsBusy = false;
         }
@@ -86,6 +87,7 @@ namespace MauiClient
                 if (selectedCountry != null)
                 {
                     SelectedSettlement.CountryID = selectedCountry.CountryID;
+                    SelectedSettlement.Country = selectedCountry;
                 }
             }
         }
@@ -114,4 +116,5 @@ namespace MauiClient
             await GetAllDatasAsync();
         }
     }
+
 }
