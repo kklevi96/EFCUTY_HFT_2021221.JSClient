@@ -71,12 +71,6 @@
 	  <MauiXaml Update="CountryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="NonCrudDevelopedCriminals.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="NonCrudPoorOldPeople.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="SettlementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
