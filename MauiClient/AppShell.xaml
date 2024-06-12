@@ -33,5 +33,17 @@
         ContentTemplate="{DataTemplate local:CitizenPage}"
         Route="CitizenPage"/>
     </FlyoutItem>
+    <!--<FlyoutItem Title="Criminals of developed countries">
+        <ShellContent
+        Title="Citizens"
+        ContentTemplate="{DataTemplate local:NonCrudDevelopedCriminals}"
+        Route="NonCrudDevelopedCriminals"/>
+    </FlyoutItem>
+    <FlyoutItem Title="People born before 1940 and living in non-OECD member countries">
+        <ShellContent
+        Title="Citizens"
+        ContentTemplate="{DataTemplate local:NonCrudPoorOldPeople}"
+        Route="NonCrudPoorOldPeople"/>
+    </FlyoutItem>-->
 
 </Shell>

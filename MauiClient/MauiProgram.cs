@@ -26,6 +26,10 @@ namespace MauiClient
             builder.Services.AddSingleton<SettlementPage>();
             builder.Services.AddSingleton<CitizenViewModel>();
             builder.Services.AddSingleton<CitizenPage>();
+            builder.Services.AddSingleton<NonCrudDevelopedCriminalsViewModel>();
+            builder.Services.AddSingleton<NonCrudDevelopedCriminals>();
+            builder.Services.AddSingleton<NonCrudPoorOldPeopleViewModel>();
+            builder.Services.AddSingleton<NonCrudPoorOldPeople>();
             return builder.Build();
         }
     }

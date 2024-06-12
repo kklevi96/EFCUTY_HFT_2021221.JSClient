@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MauiClient
 {
-    public partial class CitizenViewModel : ObservableObject
+    public partial class NonCrudPoorOldPeopleViewModel : ObservableObject
     {
         RestService restService = new RestService("http://localhost:54726/");
 
@@ -65,7 +65,7 @@ namespace MauiClient
         public ObservableCollection<string> SettlementNames { get; private set; }
 
 
-        public CitizenViewModel()
+        public NonCrudPoorOldPeopleViewModel()
         {
             citizens = new ObservableCollection<Citizen>();
             settlements = new ObservableCollection<Settlement>();
@@ -86,7 +86,7 @@ namespace MauiClient
         {
             IsBusy = true;
             citizens.Clear();
-            var list = await restService.GetAsync<Citizen>("citizen");
+            var list = await restService.GetAsync<Citizen>("CitizenStat/PoorOldPeople");
             list.ForEach(citizen => citizens.Add(citizen));
             IsBusy = false;
         }
@@ -98,7 +98,7 @@ namespace MauiClient
             SettlementNames.Clear();
             var list = await restService.GetAsync<Settlement>("settlement");
             list.ForEach(settlement => settlements.Add(settlement));
-            foreach(var settlement in settlements)
+            foreach (var settlement in settlements)
             {
                 SettlementNames.Add(settlement.SettlementName);
             }
@@ -164,7 +164,7 @@ namespace MauiClient
         [RelayCommand]
         async Task CreateCitizenAsync()
         {
-            await restService.PostAsync<Citizen>(new Citizen() { Name = new Guid().ToString(), BirthDate=new DateTime(2000,01,01), CitizenshipID=1, SettlementID=1, IncomeInUSD=10000,HasCriminalRecord=false }, "citizen");
+            await restService.PostAsync<Citizen>(new Citizen() { Name = new Guid().ToString(), BirthDate = new DateTime(2000, 01, 01), CitizenshipID = 1, SettlementID = 1, IncomeInUSD = 10000, HasCriminalRecord = false }, "citizen");
             await Shell.Current.DisplayAlert("Create", "New citizen created with default values.", "OK");
             await GetCitizensAsync();
         }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiClient.CitizenPage"
+             x:Class="MauiClient.NonCrudPoorOldPeople"
              xmlns:local="clr-namespace:MauiClient"
              xmlns:model="clr-namespace:MauiClient.Model"
-             x:DataType="local:CitizenViewModel"
+             x:DataType="local:NonCrudPoorOldPeopleViewModel"
              Title="Citizen page">
     <ContentPage.Resources>
         <Style TargetType="Button">
@@ -45,12 +45,12 @@
                 x:Name="countryPicker"
                 ItemsSource="{Binding CountryNames}"
                 SelectedItem="{Binding SelectedCitizen.Citizenship.Name, Mode=TwoWay}" 
-                IsEnabled="False"/> 
+                IsEnabled="False"/>
             <Label Text="Update country below"></Label>
             <Picker Title="Select Country"
                 x:Name="countryPicker2"
                 ItemsSource="{Binding CountryNames}"
-                SelectedItem="{Binding SelectedCountryName, Mode=TwoWay}" />    
+                SelectedItem="{Binding SelectedCountryName, Mode=TwoWay}" />
             <Label Text="{Binding SelectedCitizen.Citizenship.Name}"/>
             <Label Text="Settlement name" FontSize="Medium"/>
             <Label Text="View settlement below"/>
