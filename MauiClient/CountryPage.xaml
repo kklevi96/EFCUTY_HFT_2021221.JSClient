@@ -32,7 +32,7 @@
             <Entry Text="{Binding SelectedCountry.Name}"/>
             <Label Text="OECD Member?"/>
             <CheckBox IsChecked="{Binding SelectedCountry.IsOECDMember}" />
-            <Label Text="Country name:"/>
+            <Label Text="Total GDP in million USD:"/>
             <Entry Text="{Binding SelectedCountry.TotalGDPInMillionUSD}"/>
             <Button Text="Create country" Command="{Binding CreateCountryCommand}"/>
             <Button Text="Update country" Command="{Binding UpdateCountryCommand}"/>

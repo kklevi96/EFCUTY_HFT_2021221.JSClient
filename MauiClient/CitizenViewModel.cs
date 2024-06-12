@@ -18,15 +18,71 @@ namespace MauiClient
         ObservableCollection<Citizen> citizens;
 
         [ObservableProperty]
+        ObservableCollection<Settlement> settlements;
+
+        [ObservableProperty]
+        ObservableCollection<Country> countries;
+
+        [ObservableProperty]
         Citizen selectedCitizen;
 
         [ObservableProperty]
         bool isBusy;
 
+        [ObservableProperty]
+        private Settlement selectedSettlement;
+
+
+        private string _selectedCountryName;
+        public string SelectedCountryName
+        {
+            get => _selectedCountryName;
+            set
+            {
+                if (_selectedCountryName != value)
+                {
+                    _selectedCountryName = value;
+                    OnPropertyChanged();
+                    UpdateSelectedCountry();
+                }
+            }
+        }
+
+        private string _selectedSettlementName;
+        public string SelectedSettlementName
+        {
+            get => _selectedSettlementName;
+            set
+            {
+                if (_selectedSettlementName != value)
+                {
+                    _selectedSettlementName = value;
+                    OnPropertyChanged();
+                    UpdateSelectedCountry();
+                }
+            }
+        }
+
+        public ObservableCollection<string> CountryNames { get; private set; }
+
+        public ObservableCollection<string> SettlementNames { get; private set; }
+
+
         public CitizenViewModel()
         {
             citizens = new ObservableCollection<Citizen>();
-            GetCitizensAsync();
+            settlements = new ObservableCollection<Settlement>();
+            countries = new ObservableCollection<Country>();
+            CountryNames = new ObservableCollection<string>();
+            SettlementNames = new ObservableCollection<string>();
+            GetAllDatasAsync();
+        }
+
+        async Task GetAllDatasAsync()
+        {
+            await GetCitizensAsync();
+            await GetSettlementsAsync();
+            await GetCountriesAsync();
         }
 
         async Task GetCitizensAsync()
@@ -36,6 +92,60 @@ namespace MauiClient
             var list = await restService.GetAsync<Citizen>("citizen");
             list.ForEach(citizen => citizens.Add(citizen));
             IsBusy = false;
+        }
+
+        async Task GetSettlementsAsync()
+        {
+            IsBusy = true;
+            settlements.Clear();
+            SettlementNames.Clear();
+            var list = await restService.GetAsync<Settlement>("settlement");
+            list.ForEach(settlement => settlements.Add(settlement));
+            foreach(var settlement in settlements)
+            {
+                SettlementNames.Add(settlement.SettlementName);
+            }
+            IsBusy = false;
+        }
+
+        private async Task GetCountriesAsync()
+        {
+            IsBusy = true;
+            countries.Clear();
+            CountryNames.Clear();
+            var list = await restService.GetAsync<Country>("country");
+            list.ForEach(country => countries.Add(country));
+            foreach (var country in countries)
+            {
+                CountryNames.Add(country.Name);
+            }
+            IsBusy = false;
+        }
+
+        private void UpdateSelectedCountry()
+        {
+            if (SelectedCitizen != null && !string.IsNullOrEmpty(SelectedCountryName))
+            {
+                var selectedCountry = countries.FirstOrDefault(c => c.Name == SelectedCountryName);
+                if (selectedCountry != null)
+                {
+                    SelectedCitizen.CitizenshipID = selectedCountry.CountryID;
+                    SelectedCitizen.Citizenship = selectedCountry;
+                }
+            }
+        }
+
+        private void UpdateSelectedSettlement()
+        {
+            if (SelectedCitizen != null && !string.IsNullOrEmpty(SelectedSettlementName))
+            {
+                var selectedSettlement = settlements.FirstOrDefault(c => c.SettlementName == SelectedSettlementName);
+                if (selectedSettlement != null)
+                {
+                    SelectedCitizen.SettlementID = selectedSettlement.SettlementID;
+                    SelectedCitizen.Settlement = selectedSettlement;
+                }
+            }
         }
 
         [RelayCommand]
